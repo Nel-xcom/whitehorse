@@ -1,0 +1,150 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procesos Digitales</title>
+    <link rel="stylesheet" href="{% static 'css/procesos_digitales.css' %}">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    {% include 'loading.html' %}
+    {% include "header.html" %}
+
+    <div class="section-title">
+        <div class="section-design">
+            <h2>Procesos Digitales</h2>
+        </div>
+    </div>
+
+    <div class="procesos-container">
+
+        <!-- Instructivo General -->
+        <div class="instructivo-general">
+            <div class="titulo-boton-container">
+                <h3>Documento De Bienvenida</h3>
+                <div class="botonera">
+                    <a class="btn-nuevo-proceso" href="{% url 'crear_proceso' sector.id 'instructivo_general' %}">
+                        <i class="fas fa-plus"></i> Crear
+                    </a>
+                    <button class="btn-eliminar-proceso" onclick="abrirModal('modalEliminarGeneral')">
+                        <i class="fas fa-trash-alt"></i> Eliminar proceso
+                    </button>
+                </div>
+            </div>
+            <div class="proceso-card-p">
+                {% if instructivo_general and instructivo_general.id %}
+                    <a href="{% url 'editar_proceso' sector.id 'instructivo_general' instructivo_general.id %}" class="proceso-card-link">
+                        <div class="proceso-card {% if request.user in instructivo_general.firmado_por.all %}firmado{% else %}pendiente{% endif %}">
+                            <i class="fas fa-file-alt proceso-icon"></i>
+                            <h3 class="proceso-nombre">{{ instructivo_general.nombre }} (v{{ instructivo_general.version }})</h3>
+                            <p class="proceso-detalle">{{ instructivo_general.descripcion|truncatewords:10 }}</p>
+                        </div>
+                    </a>
+                {% else %}
+                    <p>No se ha creado un instructivo general para este sector.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Instructivos de Trabajo -->
+        <div class="instructivos-trabajo">
+            <div class="titulo-boton-container">
+                <h3>Instructivos de Trabajo</h3>
+                <div class="botonera">
+                    <a class="btn-nuevo-proceso" href="{% url 'crear_proceso' sector.id 'IT' %}">
+                        <i class="fas fa-plus"></i> Crear
+                    </a>
+                    <button class="btn-eliminar-proceso" onclick="abrirModal('modalEliminarTrabajo')">
+                        <i class="fas fa-trash-alt"></i> Eliminar proceso
+                    </button>
+                </div>
+            </div>
+            <div class="proceso-card-p">
+                {% for proceso in instructivos_trabajo %}
+                <a href="{% url 'editar_proceso' sector.id 'IT' proceso.id %}" class="proceso-card-link">
+                    <div class="proceso-card {% if request.user in proceso.firmado_por.all %}firmado{% else %}pendiente{% endif %}">
+                        <i class="fas fa-file-alt proceso-icon"></i>
+                        <h3 class="proceso-nombre">{{ proceso.nombre }} (v{{ proceso.version }})</h3>
+                        <p class="proceso-detalle">{{ proceso.descripcion|truncatewords:10 }}</p>
+                    </div>
+                </a>
+                {% empty %}
+                    <p>No hay instructivos de trabajo creados para este sector.</p>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Instructivos de Calidad -->
+        <div class="instructivos-calidad">
+            <div class="titulo-boton-container">
+                <h3>Instructivos de Calidad</h3>
+                <div class="botonera">
+                    <a class="btn-nuevo-proceso" href="{% url 'crear_proceso' sector.id 'IC' %}">
+                        <i class="fas fa-plus"></i> Crear
+                    </a>
+                    <button class="btn-eliminar-proceso" onclick="abrirModal()">
+                        <i class="fas fa-trash-alt"></i> Eliminar proceso
+                    </button>
+                </div>
+            </div>
+            <div class="proceso-card-p">
+                {% for proceso in instructivos_calidad %}
+                <a href="{% url 'editar_proceso' sector.id 'IC' proceso.id %}" class="proceso-card-link">
+                    <div class="proceso-card {% if request.user in proceso.firmado_por.all %}firmado{% else %}pendiente{% endif %}">
+                        <i class="fas fa-file-alt proceso-icon"></i>
+                        <h3 class="proceso-nombre">{{ proceso.nombre }} (v{{ proceso.version }})</h3>
+                        <p class="proceso-detalle">{{ proceso.descripcion|truncatewords:10 }}</p>
+                    </div>
+                </a>
+                {% empty %}
+                    <p>No hay instructivos de calidad creados para este sector.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE ELIMINACIÓN -->
+    <div class="modal-overlay" id="modal-overlay"></div>
+    <div class="modal" id="modal-eliminar">
+        <div class="modal-header">
+            <button class="modal-close" onclick="cerrarModal()">&times;</button>
+        </div>
+        <div class="modal-content">
+            <!-- Formulario a la izquierda -->
+            <div class="modal-form">
+                <h1>Los instructivos pueden tener infinitas versiones...</h1>
+                <h3>¿Deseas eliminarlo?</h3>
+
+                <label for="tipo-proceso">Tipo de Instructivo:</label>
+                <select id="tipo-proceso" onchange="cargarProcesos()">
+                    <option value="instructivo_general">Documento de Bienvenida</option>
+                    <option value="IT">Instructivo de Trabajo</option>
+                    <option value="IC">Instructivo de Calidad</option>
+                </select>
+
+                <label for="proceso-select">Proceso:</label>
+                <select id="proceso-select">
+                    <option value="">Seleccione un proceso</option>
+                </select>
+
+                <div class="modal-actions">
+                    <button class="btn-delete" onclick="eliminarProceso()">
+                        <i class="fas fa-trash-alt"></i> Eliminar
+                    </button>
+                </div>
+            </div>
+            <!-- Imagen a la derecha -->
+            <div class="modal-image">
+                <img src="{% static 'images/vector-notebk.jpg' %}" alt="Eliminar Proceso">
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'JS/procesos_digitales.js' %}"></script>
+    <script>
+        const procesos = {{ procesos_json|safe }};
+    </script>
+</body>
+</html>

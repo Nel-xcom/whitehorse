@@ -1,0 +1,208 @@
+/* === Global === */
+:root {
+    --primary-color: #4070B7;
+    --primary-hover: #305a8c;
+    --secondary-color: #8FFFFF;
+    --background-light: #f4f6f9;
+    --text-color: #333;
+    --border-radius: 10px;
+    --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    --transition: 0.3s ease-in-out;
+    --task-background: #ffffff;
+}
+*{
+    scrollbar-width: thin;
+    scrollbar-color: #4070B7 #f4f6f9;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background-light);
+    margin: 0;
+    padding: 0;
+    color: var(--text-color);
+}
+
+/* === Título === */
+.section-title {
+    text-align: center;
+    margin: 40px 0 20px 0;
+    font-size: 2.2em;
+    font-weight: bold;
+    color: var(--primary-color);
+    animation: fadeInDown 1s ease;
+}
+
+/* === Formulario === */
+form {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* === Contenedor de sectores === */
+.sector-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    padding: 40px 20px;
+}
+
+/* === Tarjeta de sector === */
+.sector-card {
+    width: 220px;
+    height: 180px;
+    background: var(--task-background);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition);
+    cursor: pointer;
+    border: 2px solid transparent;
+    position: relative;  /* ✅ Elementos absolutos se posicionan en relación a esta tarjeta */
+    overflow: hidden;
+    padding: 20px;
+}
+
+.sector-card:hover {
+    transform: scale(1.05);
+    border-color: var(--primary-color);
+}
+
+/* Checkbox oculto */
+.sector-card input[type="checkbox"] {
+    display: none;
+}
+
+/* Checkbox visual */
+.sector-card::before {
+    content: '✔';
+    position: absolute;
+    top: 10px;  /* ✅ Ajuste preciso para la esquina superior derecha */
+    right: 10px;
+    width: 22px;
+    height: 22px;
+    background-color: transparent;
+    color: transparent;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;  /* ✅ Para que siempre esté visible */
+    transition: all var(--transition);
+    pointer-events: none;  /* ✅ Evita que interfiera con clics */
+}
+
+/* Tarjeta seleccionada */
+.sector-card.selected {
+    border-color: var(--primary-color);
+    position: relative;
+    overflow: visible;
+}
+
+.sector-card.selected::before {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    border-color: #ffffff;
+    transform: scale(1.1);
+    animation: bounceIn 0.4s ease;
+}
+
+/* === Nombre del sector === */
+.sector-name {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: var(--text-color);
+    position: relative;
+    text-align: center;
+    margin-bottom: 10px;
+    transition: color var(--transition);
+}
+
+/* === Botón de envío === */
+.btn {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    border: none;
+    padding: 14px 28px;
+    border-radius: var(--border-radius);
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color var(--transition), transform 0.2s;
+    margin-top: 20px;
+    box-shadow: var(--box-shadow);
+}
+
+.btn:hover {
+    background-color: var(--primary-hover);
+    transform: scale(1.05);
+}
+
+/* === Animaciones === */
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+    70% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.2;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.4;
+        transform: scale(1.1);
+    }
+    100% {
+        opacity: 0.2;
+        transform: scale(1);
+    }
+}
+
+/* === Responsivo === */
+@media (max-width: 768px) {
+    .sector-container {
+        gap: 15px;
+    }
+
+    .sector-card {
+        width: 160px;
+        height: 140px;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}

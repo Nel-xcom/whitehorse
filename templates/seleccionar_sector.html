@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selecciona tu sector</title>
+    <link rel="stylesheet" href="{% static 'css/seleccion_sector.css' %}">
+</head>
+
+<body>
+    {% include 'loading.html' %}
+
+    <div class="section-title">
+        <h1>Selecciona el sector al que pertenezcas</h1>
+    </div>
+
+    <!-- Contenedor de sectores -->
+    <form method="post">
+        {% csrf_token %}
+        <div class="sector-container">
+            {% for sector in sectores %}
+                <div class="sector-card" onclick="toggleCheckbox(this)">
+                    <input type="checkbox" name="sector_ids" value="{{ sector.id }}" 
+                        id="sector-{{ sector.id }}"
+                        {% if sector in user.sectores.all %}checked{% endif %}>
+                    <label for="sector-{{ sector.id }}" class="sector-name">{{ sector.nombre }}</label>
+                </div>
+            {% endfor %}
+        </div>
+        <button type="submit" class="btn">Seleccionar Sectores</button>
+    </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sectorCards = document.querySelectorAll('.sector-card');
+        
+            sectorCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const checkbox = card.querySelector('input[type="checkbox"]');
+                    checkbox.checked = !checkbox.checked;
+        
+                    if (checkbox.checked) {
+                        card.classList.add('selected');
+                    } else {
+                        card.classList.remove('selected');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

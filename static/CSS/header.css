@@ -1,0 +1,313 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat", sans-serif;
+}
+
+/* Footer del menú */
+footer {
+    padding: 15px;
+    text-align: center;
+    font-size: 14px;
+    color: #f2f2f2;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 55px;
+    background-color: #000000;
+    align-items: center;
+}
+
+.header-logo {
+    width: 100%;
+    height: 110px;
+    display: flex;
+    justify-content: center;
+    object-fit: cover;
+}
+.header-logo > img {
+    width: 110px;
+    height: 110px;
+}
+
+.header-box {
+    width: 33.3%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* hb1: menú hamburguesa */
+.hamburger-menu {
+    font-size: 24px;
+    color: #f2f2f2;
+    width: 100%;
+    padding-left: 50px;
+}
+.hamburger-menu > i {
+    font-size: 21px;
+    cursor: pointer;
+}
+
+/* Menú lateral con transform para el efecto de deslizamiento */
+.menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20%;
+    height: 100%;
+    background-color: #000000;
+    z-index: 1000;
+    transform: translateX(-100%); /* Oculto fuera de la pantalla */
+    transition: transform 0.3s ease-in-out; /* Transición suave de 1s */
+    display: flex;
+    flex-direction: column;
+}
+
+.menu.active {
+    transform: translateX(0); /* Desliza el menú hacia la pantalla */
+}
+.menu-content2 {
+    margin-top: 30px;
+}
+/* Contenedor de la 'x' */
+.menu-header {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 5px;
+}
+
+.menu-header .close-menu {
+    font-size: 24px;
+    color: #f2f2f2;
+    cursor: pointer;
+}
+
+.menu ul {
+    list-style: none;
+    padding-top: 20px;
+    text-align: left;
+}
+
+.menu ul li {
+    padding: 5px 0;
+}
+
+.menu ul li a {
+    text-decoration: none;
+    color: white;
+    border-left: 4px solid #f2f2f2;
+    font-size: 18px;
+    padding: 10px 0 10px 10px;
+    display: block;
+    transition: background 0.3s ease;
+}
+
+.menu ul li a:hover {
+    background-color: #4070B7;
+}
+
+/* hb2: centrado del logo */
+.hb2 {
+    width: 30%;
+    height: 55px;
+}
+
+.header-box > img {
+    width: 22%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* hb3: perfil y logout */
+.logout {
+    font-size: 16px;
+    color: #f2f2f2;
+    display: flex;
+    gap: 8px;
+    text-decoration: none;
+    margin-right: 15px;
+    margin-right: 15px;
+    font-weight: 600;
+}
+
+.logout i {
+    font-size: 21px;
+    color: #ffffff;
+}
+
+.menu-redirect > a{
+    color: #ffffff;
+    font-size: 21px;
+}
+
+.hb3 {
+    padding-right: 25px;
+    justify-content: flex-end;
+}
+
+.hb3 a {
+    margin: 0 15px;
+}
+
+/* Estilo de la campana de notificaciones */
+.notification-icon {
+    position: relative;
+    cursor: pointer;
+    color: #f2f2f2;
+    font-size: 21px;
+    margin-right: 15px;
+}
+
+.notification-count {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background-color: #ff3d00;
+    color: #fff;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+}
+
+/* Estilo del panel de notificaciones */
+.notification-panel {
+    position: absolute;
+    top: 60px;
+    right: 40px;
+    background-color: #ffffff;
+    color: #333;
+    width: 450px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    display: none; /* Se muestra cuando se hace clic en la campana */
+    z-index: 100;
+}
+
+.notification-panel.show {
+    display: block;
+}
+
+.notification-panel h3 {
+    margin: 10px;
+    font-size: 16px;
+    border-bottom: 1px solid #eaeaea;
+    padding-bottom: 5px;
+}
+
+.notification-panel ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.notification-panel ul li {
+    padding: 10px;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+}
+
+.notification-panel ul li:hover {
+    background-color: #f9f9f9;
+}
+
+.notification-panel button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4070B7;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 0 0 15px 15px;
+}
+
+.notification-panel button:hover {
+    background-color: #345a8c;
+}
+
+.section-header {
+    margin-bottom: 35px;
+}
+
+.header-title {
+    color: #ffffff;
+    display: flex;
+    width: 70%;
+    margin-left: 10px;
+}
+.header-title > h3 {
+    font-size: 18px;
+    width: 100%;
+}
+.header-title > i {
+    font-size: 18px;
+    margin-right: 15px;
+    color:#4070B7;
+}
+
+@media (max-width: 1024px) {
+    .menu {
+        width: 30%;
+    }
+
+    .notification-panel {
+        width: 350px;
+        top: 55px;
+        right: 30px;
+    }
+
+    .header-title > h3 {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 768px) {
+    .menu {
+        width: 40%;
+    }
+
+    .notification-panel {
+        width: 300px;
+        top: 50px;
+        right: 20px;
+    }
+
+    .header-title > h3 {
+        font-size: 16px;
+    }
+
+    .hamburger-menu {
+        padding-left: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .menu {
+        width: 60%;
+    }
+
+    .notification-panel {
+        width: 250px;
+        top: 45px;
+        right: 10px;
+    }
+
+    .header-title > h3 {
+        font-size: 14px;
+    }
+
+    .hamburger-menu {
+        padding-left: 20px;
+    }
+
+    .header-box img {
+        width: 50%;
+    }
+}

@@ -1,0 +1,124 @@
+/* Variables globales */
+:root {
+    --primary-color: #4070B7;
+    --secondary-color: #ffffff;
+    --background-overlay: rgba(255, 255, 255, 0.966);
+    --loading-bar-height: 8px;
+    --loading-bar-radius: 10px;
+    --font-family: 'Arial', sans-serif;
+}
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Contenedor principal */
+#loading-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--background-overlay);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Ocultar el contenedor */
+.loading-hidden {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+}
+
+/* Contenido de carga */
+.loading-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    animation: fadeIn 1.5s ease-in-out infinite;
+}
+
+/* Imagen de carga */
+.loading-image {
+    width: 250px;
+    height: 250px;
+    object-fit: contain;
+}
+
+/* Texto de carga */
+.loading-text {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    font-weight: 600;
+    font-family: var(--font-family);
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Contenedor de la barra de carga */
+.loading-bar-container {
+    width: 300px;
+    height: var(--loading-bar-height);
+    background-color: #ffffff;
+    border-radius: var(--loading-bar-radius);
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Barra de carga */
+.loading-bar {
+    width: 0%;
+    height: 100%;
+    background-color: var(--primary-color);
+    border-radius: var(--loading-bar-radius);
+    animation: loadingAnimation 3s infinite forwards;
+}
+
+/* Animación de la barra de carga */
+@keyframes loadingAnimation {
+    0% {
+        width: 0%;
+    }
+    50% {
+        width: 70%;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+/* Animación de fade-in para la imagen */
+@keyframes fadeIn {
+    0% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.3;
+    }
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .loading-bar-container {
+        width: 220px;
+    }
+    .loading-image {
+        width: 80px;
+        height: 80px;
+    }
+    .loading-text {
+        font-size: 1rem;
+    }
+}

@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitudes de Tareas</title>
+    <link rel="stylesheet" href="{% static 'css/solicitudes_tareas.css' %}">
+</head>
+<body>
+    {% include 'loading.html' %}
+    <h1>Solicitudes de Tareas</h1>
+
+    <div class="solicitudes-container">
+        <div class="solicitudes-recibidas">
+            <h2>Solicitudes Recibidas</h2>
+            {% if solicitudes_recibidas %}
+                {% for solicitud in solicitudes_recibidas %}
+                    <div class="card-solicitud">
+                        <p><strong>De:</strong> {{ solicitud.solicitante.username }}</p>
+                        <p><strong>Descripción:</strong> {{ solicitud.descripcion }}</p>
+                        <p><strong>Fecha:</strong> {{ solicitud.fecha_creacion }}</p>
+                        <div class="acciones-solicitud">
+                            <form method="post" action="{% url 'aceptar_solicitud' solicitud.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn-aceptar">Aceptar</button>
+                            </form>
+                            <form method="post" action="{% url 'rechazar_solicitud' solicitud.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn-rechazar">Rechazar</button>
+                            </form>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No tienes solicitudes pendientes.</p>
+            {% endif %}
+        </div>
+
+        <div class="solicitudes-enviadas">
+            <h2>Solicitudes Enviadas</h2>
+            {% if solicitudes_enviadas %}
+                {% for solicitud in solicitudes_enviadas %}
+                    <div class="card-solicitud">
+                        <p><strong>Para:</strong> {{ solicitud.destinatario.username }}</p>
+                        <p><strong>Descripción:</strong> {{ solicitud.descripcion }}</p>
+                        <p><strong>Estado:</strong> {{ solicitud.estado }}</p>
+                        <p><strong>Fecha:</strong> {{ solicitud.fecha_creacion }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No has enviado solicitudes aún.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <script src="{% static 'js/solicitud_tarea.js' %}"></script>
+</body>
+</html>

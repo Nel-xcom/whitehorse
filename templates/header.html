@@ -1,0 +1,138 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+
+    <!--FONTS-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <!--FONT ICON-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-box hb1">
+            <div class="hamburger-menu">
+                <i class="fas fa-bars an-menu"></i>
+            </div>
+            <nav class="menu">
+                <div class="menu-content1">
+                    <div class="menu-header">
+                        <i class="fas fa-times close-menu"></i>
+                    </div>
+                    <div class="header-logo">
+                        <img src="{% static 'images/isologo.png' %}" alt="NelX">
+                    </div>
+    
+                </div>
+                <div class="menu-content2">
+                    <div class="section-header">
+                        <div class="header-title">
+                            <i class="fa-regular fa-building"></i>
+                            <h3>1. Mi Empresa</h3>
+                        </div>
+                        <ul>
+                            <li><a href="{% url 'agregar_sector' %}">1.1 Estructura Organizacional</a></li>
+                            <li><a href="{% url 'panel_empresa' %}">1.2 Mediciones por Sector</a></li>
+                        </ul>
+                    </div>
+                    <div class="section-header">
+                        <div class="header-title">
+                            <i class="fas fa-brain"></i>
+                            <h3>2. Gestión Inteligente</h3>
+                        </div>
+                        <ul>
+                            <li><a href="{% url 'comunicacion_interna' %}">2.1 Solicitudes Internas</a></li>
+                        </ul>
+                    </div>
+                    <div class="section-header">
+                        <div class="header-title">
+                            <i class="fa-solid fa-gear"></i>
+                            <h3>3. Configuración</h3>
+                        </div>
+                        <ul>
+                            <li><a href="{% url 'lista_usuarios' %}">3.1 Usuarios y permisos</a></li>
+                        </ul>
+                    </div>
+                    <footer>
+                        <p>Powered by <b>NelX</b> &copy; 2024</p>
+                    </footer>
+                </div>
+            </nav>
+        </div>
+
+        <!--<div class="header-box hb2">
+            <img src="{% static 'images/NelX-01.png' %}" alt="NelX">
+        </div>-->
+
+        <div class="header-box hb3">
+            <!-- Icono de Home -->
+            <div class="menu-redirect">
+                <a href="{% url 'home' %}"><i class="fas fa-home"></i></a>
+            </div>
+
+            <!-- Icono de campana de notificaciones -->
+            <div class="notification-icon" onclick="toggleNotificationPanel()">
+                <i class="fas fa-bell"></i>
+                <span class="notification-count">{{ cantidad_no_leidas }}</span> <!-- Contador de no leídas -->
+            </div>
+
+            <!-- Panel de notificaciones -->
+            <div class="notification-panel" id="notification-panel">
+                <h3>Notificaciones</h3>
+                <ul>
+                    {% for notificacion in notificaciones_no_leidas %}
+                        <li>
+                            <strong>{{ notificacion.titulo }}</strong>
+                            <p>{{ notificacion.mensaje }}</p>
+                        </li>
+                    {% empty %}
+                        <li>No tienes nuevas notificaciones</li>
+                    {% endfor %}
+                </ul>
+                <button onclick="markAllAsRead()">Marcar todas como leídas</button>
+            </div>
+
+            <!-- Cerrar sesión -->
+            <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="logout" style="background: none; border: none; color: #f2f2f2; cursor: pointer;">
+                    Cerrar sesión<i class="fas fa-sign-out-alt"></i> 
+                </button>
+            </form>
+
+    </header>
+
+    <script src="{% static 'js/header.js' %}"></script> <!-- Para manejar la animación del menú -->
+    <script>
+        function toggleNotificationPanel() {
+            const panel = document.getElementById("notification-panel");
+            panel.classList.toggle("show");
+        }
+
+        function markAllAsRead() {
+            fetch("{% url 'marcar_todas_como_leidas' %}", {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": "{{ csrf_token }}"
+                }
+            }).then(response => {
+                if (response.ok) {
+                    document.querySelector(".notification-count").textContent = "0";
+                    const notificationList = document.querySelector("#notification-panel ul");
+                    notificationList.innerHTML = "<li>No tienes nuevas notificaciones</li>";  // Vacía el panel
+                    const panel = document.getElementById("notification-panel");
+                    panel.classList.remove("show");
+                }
+            });
+        }
+    </script>
+</body>
+</html>

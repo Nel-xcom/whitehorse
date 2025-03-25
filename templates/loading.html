@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading...</title>
+    <link rel="stylesheet" href="{% static 'css/loading.css' %}">
+</head>
+
+<body>
+    <div id="loading-container">
+        <div class="loading-content">
+            <img src="{% static 'images/isologo.png' %}" alt="Loading Animation" class="loading-image">
+            <div class="loading-bar-container">
+                <div class="loading-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/loading.js' %}"></script>
+</body>
+
+</html>

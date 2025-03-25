@@ -1,0 +1,136 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <style>
+        body {
+            background-image: url("{% static 'images/home-back.png' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    </style>
+</head>
+<body>
+    {% include 'loading.html' %}
+    {% include "header.html" %}
+    <!--  Section title
+    <div class="section-title">
+        <div class="section-design">
+            <i class="fas fa-home"></i>
+            <h2>Home</h2>
+        </div>
+    </div>
+    -->
+
+    <div class="home-container">
+        <!-- Contenedor Iniciar Tarea Inteligente -->
+        <div class="contenedor-iniciar-tarea">
+            <div class="iniciar-title">
+                <h2>Tarea Inteligente
+                    <p id="typewriter-text">El sistema seleccionará la tarea que mejor se adapte a tu perfil</p>
+                </h2>
+            </div>
+            <button class="btn-iniciar-tarea">
+                <i class="fas fa-play"></i> Iniciar
+            </button>
+        </div>
+
+
+        <!-- Contenedor de Usuarios con Tareas Finalizadas -->
+        <div class="contenedor-tareas-finalizadas">
+            <h2>Ranking de Productividad</h2>
+            <table class="tabla-tareas">
+                <thead>
+                    <tr>
+                        <th>Usuario</th>
+                        <th>Sector</th>
+                        <th>Tareas Finalizadas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for usuario in ranking_tareas_finalizadas %}
+                    <tr>
+                        <td>{{ usuario.destinatario__first_name }} {{ usuario.destinatario__last_name }}</td>
+                        <td>{{ usuario.destinatario__sectores__nombre }}</td>
+                        <td>{{ usuario.total_tareas }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="3">No hay usuarios con tareas finalizadas ayer.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+
+        <div class="contenedores-tareas">
+            <!-- Tareas Pendientes -->
+            <div class="contenedor-tarea">
+                <h3>Tareas Pendientes ({{ tareas_pendientes|length }})</h3>
+                <table class="tabla-tareas-usuario">
+                    <tbody>
+                        {% for tarea in tareas_pendientes %}
+                        <tr>
+                            <td><a href="{% url 'gestionar_tarea' tarea.id %}">{{ tarea.descripcion }}</a></td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td>No tienes tareas pendientes.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        
+            <!-- Tareas en Curso -->
+            <div class="contenedor-tarea">
+                <h3>Tareas en Curso ({{tareas_en_curso|length}})</h3>
+                <table class="tabla-tareas-usuario">
+                    <tbody>
+                        {% for tarea in tareas_en_curso %}
+                        <tr>
+                            <td><a href="{% url 'gestionar_tarea' tarea.id %}">{{ tarea.descripcion }}</a></td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td>No tienes tareas en curso.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        
+            <!-- Tareas Finalizadas -->
+            <div class="contenedor-tarea">
+                <h3>Tareas Finalizadas ({{tareas_finalizadas_usuario|length}})</h3>
+                <table class="tabla-tareas-usuario">
+                    <tbody>
+                        {% for tarea in tareas_finalizadas_usuario %}
+                        <tr>
+                            <td><a href="{% url 'gestionar_tarea' tarea.id %}">{{ tarea.descripcion }}</a></td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td>No tienes tareas finalizadas.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        
+        
+    </div>
+
+    <script src="{% static 'js/home.js' %}"></script>
+</body>
+</html>

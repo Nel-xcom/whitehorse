@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Tarea</title>
+    <link rel="stylesheet" href="{% static 'css/gestionar_tarea.css' %}">
+</head>
+<body>
+    {% include 'loading.html' %}
+    {% include "header.html" %}
+    <div class="section-title">
+        <div class="section-design">
+            <h2>Seguimiento de tarea</h2>
+        </div>
+    </div>
+
+    <div class="gestion-tarea-container">
+        <div class="tarea-detalle" id="tarea-detalle">
+            <!-- ID oculto de la tarea -->
+            <span id="tarea-id" style="display: none;">{{ tarea.id }}</span>
+
+            <h3>Tarea: <span id="descripcion-texto">{{ tarea.descripcion }}</span></h3>
+            <input type="text" id="descripcion-input" class="editable" value="{{ tarea.descripcion }}" style="display: none;">
+    
+            <p><strong>Solicitante:</strong> {{ tarea.solicitante.first_name }} {{ tarea.solicitante.last_name }}</p>
+    
+            <p><strong>Fecha de Finalización:</strong> 
+                <span id="fecha-texto">{{ tarea.fecha_finalizacion }}</span>
+            </p>
+            <input type="date" id="fecha-input" class="editable" value="{{ tarea.fecha_finalizacion }}" style="display: none;">
+    
+            <p><strong>Estado:</strong>
+                <span id="estado-texto">{{ tarea.get_estado_display }}</span>
+            </p>
+            <select id="estado-select" class="editable" style="display: none;">
+                {% for key, value in tarea.ESTADOS %}
+                    <option value="{{ key }}" {% if tarea.estado == key %}selected{% endif %}>{{ value }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="tarea-acciones">
+            <button id="btn-actualizar" class="btn-actualizar">Actualizar Datos</button>
+            <button id="btn-finalizar" class="btn-actualizar">
+                <i class="fas fa-check"></i> Finalizar Tarea
+            </button>
+            <button id="btn-guardar" class="btn-guardar" style="display: none;">Guardar</button>
+        </div>
+        
+    </div>
+
+    <div class="comentarios-container">
+        <h2>Comentarios</h2>
+        <!-- Formulario para agregar un comentario -->
+        <div class="comentario-nuevo">
+            <img src="https://via.placeholder.com/50" alt="User Avatar" class="user-avatar">
+            <textarea placeholder="Escribe un comentario..." class="comentario-input"></textarea>
+            <button class="btn-comentar"><i class="fas fa-paper-plane"></i> Enviar</button>
+        </div>
+    
+        <!-- Línea separadora -->
+        <hr class="comentarios-separador">
+    
+        <!-- Lista de comentarios -->
+        <div class="comentarios-lista">
+            {% for comentario in tarea.comentarios.all %}
+            <div class="comentario" data-id="{{ comentario.id }}">
+                <img src="https://via.placeholder.com/50" alt="User Avatar" class="user-avatar">
+                <div class="comentario-detalle">
+                    <h4>{{ comentario.usuario.get_full_name }}</h4>
+                    <p class="comentario-texto">{{ comentario.texto }}</p>
+                    <textarea class="comentario-editar" style="display: none;"></textarea>
+                    <small>{{ comentario.fecha_creacion|timesince }} atrás</small>
+                </div>
+                <div class="comentario-acciones">
+                    <button class="btn-editar" title="Editar"><i class="fas fa-edit"></i></button>
+                    <button class="btn-eliminar" title="Eliminar"><i class="fas fa-trash"></i></button>
+                </div>
+            </div>
+            {% empty %}
+            <p class="comentarios-vacios">No hay comentarios aún. Sé el primero en comentar.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Token CSRF para solicitudes POST -->
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+
+    <script src="{% static 'js/gestionar_tarea.js' %}"></script>
+</body>
+</html>

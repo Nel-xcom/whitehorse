@@ -1,0 +1,295 @@
+/* ======= 🎨 VARIABLES GLOBALES ======= */
+:root {
+    --primary-color: #4070B7; /* Azul corporativo */
+    --secondary-color: #305A91; /* Azul oscuro */
+    --accent-color: #FACC15; /* Amarillo sutil */
+    --danger-color: #D32F2F; /* Rojo elegante */
+    --background-color: #F4F6F9; /* Fondo gris claro */
+    --text-color: #1F2937; /* Gris oscuro */
+    --light-gray: #E5E7EB; /* Gris claro */
+    --border-gray: #D1D5DB; /* Gris de bordes */
+    --shadow-color: rgba(0, 0, 0, 0.08); /* Sombra ligera */
+    --font-family: 'Inter', sans-serif;
+}
+
+/* ======= 🔹 REGLAS GENERALES ======= */
+*{
+    scrollbar-width: thin;
+    scrollbar-color: #4070B7 #f4f6f9;
+}
+body {
+    font-family: var(--font-family);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* ======= 🔹 ENCABEZADO Y TÍTULO ======= */
+.section-title {
+    display: flex;
+    align-items: center;
+    height: 90px;
+    padding: 0 5%;
+    background: var(--primary-color);
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+.section-title h2 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+}
+
+/* ======= 🔹 CONTENEDOR PRINCIPAL ======= */
+.contenedor-sectores {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 24px;
+    padding: 30px;
+}
+
+/* ======= 📝 TARJETAS DE SECTOR ======= */
+.agregar-sector, .mostrar-sector {
+    flex: 1 1 400px;
+    background-color: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 10px var(--shadow-color);
+    border: 1px solid var(--border-gray);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.agregar-sector:hover, .mostrar-sector:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 16px var(--shadow-color);
+}
+
+.agregar-sector h2, .mostrar-sector h2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 22px;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* ======= 📝 FORMULARIO DE SECTOR ======= */
+form p {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 14px;
+}
+
+form p label {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+form p input, form p textarea {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid var(--border-gray);
+    outline: none;
+    transition: border-color 0.2s ease-in-out;
+}
+
+form p input:focus, form p textarea:focus {
+    border-color: var(--primary-color);
+}
+
+/* ======= 🔘 BOTONES ======= */
+.btn {
+    width: 100%;
+    padding: 12px;
+    background: var(--primary-color);
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+    background: var(--secondary-color);
+    transform: scale(1.03);
+}
+
+.btn-danger {
+    background: var(--danger-color);
+    color: white;
+    padding: 5px;
+}
+
+.btn-danger:hover {
+    background: #B91C1C;
+}
+
+.btn-secondary {
+    background: var(--light-gray);
+    color: var(--text-color);
+    padding: 5px;
+}
+
+.btn-secondary:hover {
+    background: var(--border-gray);
+}
+
+/* ======= 📜 LISTA DE SECTORES ======= */
+.mostrar-sector ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mostrar-sector ul li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    padding: 14px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--light-gray);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+/* 🔹 Línea gris muy sutil para separar info del tacho */
+.mostrar-sector ul li::after {
+    content: '';
+    position: absolute;
+    right: 60px;
+    top: 10%;
+    bottom: 10%;
+    width: 1px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* ✅ Hover mejorado */
+.mostrar-sector ul li:hover {
+    background: var(--background-color);
+    box-shadow: 0 2px 6px var(--shadow-color);
+}
+
+/* 🔹 Elementos dentro de cada sector */
+.sector-info {
+    flex-grow: 1;
+    padding-right: 10px;
+}
+
+/* 🔹 Enlaces de los sectores */
+.mostrar-sector ul li a {
+    text-decoration: none;
+    color: var(--primary-color);
+    transition: color 0.2s ease-in-out;
+}
+
+.mostrar-sector ul li a:hover {
+    color: var(--secondary-color);
+}
+
+/* 🔹 Icono del tacho alineado al margen derecho */
+.sector-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 40px;
+    flex-shrink: 0;
+}
+
+.sector-actions a {
+    width: 100%;
+    color: var(--danger-color);
+    font-size: 18px;
+    transition: transform 0.2s ease, color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sector-actions a:hover {
+    transform: scale(1.1);
+    color: #B91C1C;
+}
+
+/* ======= 🛑 MENSAJES VACÍOS ======= */
+.mostrar-sector ul li:empty {
+    text-align: center;
+    font-size: 16px;
+    color: var(--text-color);
+    padding: 20px;
+    border: 1px dashed var(--border-gray);
+}
+
+/* ======= ⚠️ MODAL (VENTANA EMERGENTE) ======= */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(6px);
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+#confirm-delete-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    z-index: 1000;
+}
+
+#confirm-delete-modal > p{
+    margin-bottom: 15px;
+}
+
+#confirm-delete-modal.active {
+    display: block;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* ======= 📱 MEDIA QUERIES ======= */
+@media (max-width: 768px) {
+    .contenedor-sectores {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .agregar-sector, .mostrar-sector {
+        width: 100%;
+    }
+
+    .section-title {
+        text-align: left;
+        padding-left: 5%;
+    }
+}

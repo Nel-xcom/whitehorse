@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proceso del Sector: {{ sector.nombre}}</title>
+    <link rel="stylesheet" href="{% static 'css/ver_proceso.css' %}">
+</head>
+<body>
+
+    {% include 'loading.html' %}
+
+    <div class="body-des-pos">
+        <div class="body-des">
+    
+            <div class="main-container">
+                {% if instructivo %}
+                    <!-- Sección del logo -->
+                    <!-- Sección del logo del instructivo -->
+                    <div class="logo-section">
+                        {% if instructivo.logo_empresa %}
+                            <img src="{{ instructivo.logo_empresa.url }}" alt="Logo del Instructivo" class="company-logo">
+                        {% elif sector.logo %}
+                            <img src="{{ sector.logo.url }}" alt="Logo del Sector" class="company-logo">
+                        {% else %}
+                            <p class="no-logo">No se ha asignado un logo para este sector.</p>
+                        {% endif %}
+    
+                    </div>
+    
+                    <div class="section-title">
+                        <h1>Documento de Bienvenida</h1>
+                    </div>
+        
+                    <!-- Descripción del sector -->
+                    <div class="description-section">
+                        <h3>Sobre {{ sector.nombre }}</h3>
+                        <p>{{ instructivo.descripcion_sector }}</p>
+                    </div>
+
+                    <!-- Compromiso -->
+                    <div class="description-section">
+                        <h3>Compromiso</h3>
+                        <p>Al firmar este documento, asumes un compromiso
+                            activo con los objetivos y valores del sector
+                            y la empresa. Tu participación es clave para 
+                            mantener altos estándares de desempeño, colaboración
+                            y crecimiento continuo. Esperamos que contribuyas
+                            con tu experiencia, creatividad y dedicación,
+                            promoviendo un ambiente de respeto y trabajo en
+                            equipo.
+                            Este compromiso implica cumplir con las tareas
+                            asignadas, respetar los procesos establecidos y
+                            aportar soluciones que impulsen la eficiencia y
+                            la innovación. Juntos, construimos un entorno donde
+                            cada acción contribuye al éxito colectivo.</p>
+                    </div>
+        
+                    <!-- Lista de Perfiles de Puesto -->
+                    <h3>Usuarios del Sector</h3>
+                    <ul class="user-list">
+                        {% for usuario in usuarios_con_perfil %}
+                            <li>
+                                <b>{{ usuario.nombre }}</b> - {{ usuario.perfil }}
+                                {% if usuario.descripcion %}
+                                    <span class="description">({{ usuario.descripcion }})</span>
+                                {% endif %}
+                            </li>
+                        {% empty %}
+                            <li class="empty">No hay usuarios registrados en este sector.</li>
+                        {% endfor %}
+                    </ul>                    
+        
+                    <!-- Botón de aceptación -->
+                    <div class="save-process">
+                        <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="sector_id" value="{{ sector.id }}">
+                            <button type="submit" class="btn accept-process-btn">
+                                👍 Aceptar Proceso Empresarial
+                            </button>
+                        </form>                    
+                    </div>
+                    
+                {% else %}
+                    <p class="no-process-message">
+                        ⚠️ No hay un documento de bienvenida para este sector.
+                    </p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

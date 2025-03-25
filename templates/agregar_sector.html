@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Sector</title>
+    <link rel="stylesheet" href="{% static 'css/sectores.css' %}">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    {% include 'loading.html' %}
+    {% include "header.html" %}
+
+    <div class="section-title">
+        <div class="section-design">
+            <h2><i class="fas fa-building"></i> Estructura Organizacional</h2>
+        </div>
+    </div>
+
+    
+
+    <div class="contenedor-sectores">
+
+        <div class="mostrar-sector">
+            <h2><i class="fas fa-tasks"></i> Sectores</h2>
+            <ul>
+                {% for sector in sectores %}
+                    <li>
+                        <a href="{% url 'gestion_tareas' sector.id %}">
+                            <div class="sector-info">
+                                <strong>{{ sector.nombre }}</strong><br>
+                                <p>{{ sector.descripcion }}</p>
+                            </div>
+                        </a>
+                        <div class="sector-actions">
+                            <a href="#" class="delete-sector" data-sector-id="{{ sector.id }}">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </div>
+                    </li>
+                {% empty %}
+                    <li>No hay sectores agregados aún.</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="agregar-sector">
+            <h2><i class="fas fa-plus-circle"></i> Agregar Sector</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn"><i class="fas fa-save"></i> Agregar Sector</button>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="modal-overlay"></div>
+    <div id="confirm-delete-modal">
+        <p><i class="fas fa-exclamation-triangle"></i> ¿Estás seguro que deseas borrar este sector?</p>
+        <button id="confirm-delete-btn" class="btn-danger"><i class="fas fa-check"></i> Sí, borrar</button>
+        <button id="cancel-delete-btn" class="btn-secondary"><i class="fas fa-times"></i> Cancelar</button>
+    </div>
+
+    <script src="{% static 'js/agregar_sector.js' %}"></script>
+</body>
+
+</html>

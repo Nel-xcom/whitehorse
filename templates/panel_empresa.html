@@ -1,0 +1,116 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Analítico Empresarial</title>
+    <link rel="stylesheet" href="{% static 'css/panel_empresa.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    {% include 'loading.html' %}
+    {% include "header.html" %}
+
+    <div class="section-title">
+        <div class="section-design">
+            <h2>Salud Empresarial</h2>
+        </div>
+    </div>
+
+    <!-- Contenedor Principal -->
+    <div class="dashboard-container">
+        <!-- Filtros -->
+        <div class="filters">
+            <div class="filter">
+                <label for="sector-filter">Sector:</label>
+                <select id="sector-filter">
+                    <option value="all">Todos</option>
+                    {% for sector in sectores %}
+                    <option value="{{ sector.nombre }}">{{ sector.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="filter">
+                <label for="date-range">Rango de Fechas:</label>
+                <h4>Desde: </h4>
+                <input type="date" id="start-date"> - 
+                <h4>Hasta: </h4>
+                <input type="date" id="end-date">
+            </div>
+            <button class="filter-apply">Aplicar Filtros</button>
+        </div>
+
+        <!-- Resumen General -->
+        <div class="summary-cards">
+            <div class="summary-card">
+                <h3>Tareas Gestionadas</h3>
+                <p>241 <span class="trend trend-down"><i class="fas fa-arrow-down"></i> -51%</span></p>
+            </div>
+            <div class="summary-card">
+                <h3>Productividad General</h3>
+                <p>76% <span class="trend trend-up"><i class="fas fa-arrow-up"></i> +13%</span></p>
+            </div>
+            <div class="summary-card">
+                <h3>Tareas rechazadas</h3>
+                <p>23 <span class="trend trend-up"><i class="fas fa-arrow-up"></i> +5%</span></p>
+            </div>
+            <div class="summary-card">
+                <h3>Zonas de Mejora</h3>
+                <p>7 tareas <span class="trend trend-down"><i class="fas fa-arrow-down"></i> -3%</span></p>
+            </div>
+        </div>
+
+        <!-- Gráficos -->
+        <div class="charts-container">
+            <div class="chart-card">
+                <h3>Productividad General</h3>
+                <canvas id="productividad-chart"></canvas>
+            </div>
+            <div class="chart-card">
+                <h3>Actividad Semanal</h3>
+                <canvas id="actividad-semanal-chart"></canvas>
+            </div>
+            <div class="chart-card">
+                <h3>Usuarios Menos Productivos</h3>
+                <canvas id="usuarios-productividad-chart"></canvas>
+            </div>
+        </div>
+
+        <!-- Tablas -->
+        <div class="tables-container">
+            <div class="table-card">
+                <h3>Total de Tareas Completadas</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Usuario</th>
+                            <th>Sector</th>
+                            <th>Tareas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Juan Pérez</td>
+                            <td>Recursos Humanos</td>
+                            <td>12</td>
+                        </tr>
+                        <tr>
+                            <td>María López</td>
+                            <td>Desarrollo</td>
+                            <td>10</td>
+                        </tr>
+                        <tr>
+                            <td>Pedro González</td>
+                            <td>Ventas</td>
+                            <td>8</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/panel_empresa.js' %}"></script>
+</body>
+</html>

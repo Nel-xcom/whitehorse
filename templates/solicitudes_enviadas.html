@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitudes Enviadas</title>
+    <link rel="stylesheet" href="{% static 'css/solicitudes_enviadas.css' %}">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    {% include 'loading.html' %}
+    {% include "header.html" %}
+    <div class="section-title">
+        <div class="section-design">
+            <h2>Solicitudes Enviadas</h2>
+        </div>
+    </div>
+
+    <div class="solicitudes-container">
+        <!-- Barra de búsqueda -->
+        <div class="barra-busqueda">
+            <form method="get">
+                <input type="text" name="q" value="{{ query }}" placeholder="Buscar por destinatario o estado">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </form>
+        </div>
+    
+        <!-- Tabla de Solicitudes -->
+        <div class="tabla-solicitudes">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Destinatario</th>
+                        <th>Descripción</th>
+                        <th>Fecha</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for solicitud in solicitudes %}
+                    <tr>
+                        <td>{{ solicitud.destinatario.first_name }} {{ solicitud.destinatario.last_name }}</td>
+                        <td>{{ solicitud.descripcion }}</td>
+                        <td>{{ solicitud.fecha_creacion|date:"d/m/Y" }}</td>
+                        <td>
+                            <span class="estado {{ solicitud.estado }}">
+                                {{ solicitud.get_estado_display }}
+                            </span>
+                        </td>
+                        <td>
+                            <a href="{% url 'gestionar_tarea' solicitud.id %}" class="btn-detalle"><i class="fas fa-eye"></i></a>
+                            {% if solicitud.estado == 'pendiente' %}
+                            <form method="post" action="{% url 'cancelar_solicitud' solicitud.id %}" style="display: inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn-cancelar"><i class="fas fa-times"></i></button>
+                            </form>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5">No se encontraron solicitudes.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    
+        <!-- Paginación -->
+        <div class="paginacion">
+            <span class="step-links">
+                {% if solicitudes.has_previous %}
+                    <a href="?page=1{% if query %}&q={{ query }}{% endif %}">&laquo; Primero</a>
+                    <a href="?page={{ solicitudes.previous_page_number }}{% if query %}&q={{ query }}{% endif %}">&lsaquo; Anterior</a>
+                {% endif %}
+    
+                <span class="current">
+                    Página {{ solicitudes.number }} de {{ solicitudes.paginator.num_pages }}
+                </span>
+    
+                {% if solicitudes.has_next %}
+                    <a href="?page={{ solicitudes.next_page_number }}{% if query %}&q={{ query }}{% endif %}">Siguiente &rsaquo;</a>
+                    <a href="?page={{ solicitudes.paginator.num_pages }}{% if query %}&q={{ query }}{% endif %}">Último &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+    
+</body>
+</html>

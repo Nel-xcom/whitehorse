@@ -1,0 +1,115 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Tareas</title>
+    <link rel="stylesheet" href="{% static 'css/editar_tareas.css' %}">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    {% include 'loading.html' %}
+    {% include "header.html" %}
+
+    <div class="section-title">
+        <div class="section-design">
+            <h2>Editar: {{tarea.nombre}}</h2>
+        </div>
+    </div>
+
+    <div class="main-container">
+        
+        <div class="edit-task">
+            <div class="edit-task-title">
+                <h2>Editar Campos de la Tarea</h2>
+            </div>
+            
+            <form method="post" action="{% url 'editar_tarea' tarea.id %}">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+            
+                <div class="input-style">
+                    <label for="nombre">Nombre:</label>
+                    {{ form.nombre.errors }}
+                    {{ form.nombre }}
+                </div>
+            
+                <div class="input-style">
+                    <label for="descripcion">Descripción:</label>
+                    {{ form.descripcion.errors }}
+                    {{ form.descripcion }}
+                </div>
+            
+                <div class="input-style">
+                    <label for="estado">Estado:</label>
+                    {{ form.estado.errors }}
+                    {{ form.estado }}
+                </div>
+            
+                <div class="input-style">
+                    <label for="fecha_vencimiento">Fecha de Vencimiento:</label>
+                    {{ form.fecha_vencimiento.errors }}
+                    {{ form.fecha_vencimiento }}
+                </div>
+            
+                <button type="submit" class="btn">Guardar Cambios</button>
+            </form>
+        </div>
+
+        <!-- Sección para configurar notificaciones -->
+        <div class="configure-notifications">
+            <div class="notifications-title">
+                <h2>Crear notificación</h2>
+            </div>
+
+            <!-- Formulario para crear nueva notificación -->
+            <form method="post" action="{% url 'gestionar_notificaciones' tarea.id %}">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+
+                <div class="input-style">
+                    <label for="titulo">Título:</label>
+                    {{ form.titulo }}
+                </div>
+
+                <div class="input-style">
+                    <label for="mensaje">Mensaje:</label>
+                    {{ form.mensaje }}
+                </div>
+
+                <div class="input-style">
+                    <label for="dia">Día:</label>
+                    {{ form.dia }}
+                </div>
+
+                <div class="input-style">
+                    <label for="hora_envio">Hora de Envío:</label>
+                    {{ form.hora_envio }}
+                </div>
+
+                <div class="input-style">
+                    <label for="enviar_ahora">Enviar Ahora:</label>
+                    {{ form.enviar_ahora }}
+                </div>
+
+                <button type="submit" class="btn">Crear Notificación</button>
+            </form>
+
+            <!-- Lista de notificaciones existentes -->
+            <div class="existing-notifications">
+                <h3>Crear notificacion</h3>
+                <ul>
+                    {% for notificacion in notificaciones %}
+                        <li>{{ notificacion.titulo }} - {{ notificacion.dia }} a las {{ notificacion.hora_envio }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

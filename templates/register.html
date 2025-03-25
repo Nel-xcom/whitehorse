@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Usuario</title>
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+</head>
+<body>
+    {% include 'loading.html' %}
+    <!-- Agregamos el logo -->
+    <div class="logo-container">
+        <img src="{% static 'images/NelX-01.png' %}" alt="Logo" class="logo">
+    </div>
+
+    <div class="container">
+        <h2>Crear una cuenta</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.username.label_tag }}
+                {{ form.username }}
+                {% if form.username.errors %}
+                    <p class="error">{{ form.username.errors }}</p>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.first_name.label_tag }}
+                {{ form.first_name }}
+                {% if form.first_name.errors %}
+                    <p class="error">{{ form.first_name.errors }}</p>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.last_name.label_tag }}
+                {{ form.last_name }}
+                {% if form.last_name.errors %}
+                    <p class="error">{{ form.last_name.errors }}</p>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.email.label_tag }}
+                {{ form.email }}
+                {% if form.email.errors %}
+                    <p class="error">{{ form.email.errors }}</p>
+                {% endif %}
+            </div>
+            <div class="form-group password-field">
+                {{ form.password.label_tag }}
+                <div class="password-wrapper">
+                    {{ form.password }}
+                    <span class="toggle-password" onclick="togglePassword('id_password')">
+                        <img src="{% static 'images/eye-closed.png' %}" alt="Mostrar contraseña" id="togglePasswordIcon_id_password">
+                    </span>
+                </div>
+                {% if form.password.errors %}
+                    <p class="error">{{ form.password.errors }}</p>
+                {% endif %}
+            </div>
+            <div class="form-group password-field">
+                {{ form.confirm_password.label_tag }}
+                <div class="password-wrapper">
+                    {{ form.confirm_password }}
+                    <span class="toggle-password" onclick="togglePassword('id_confirm_password')">
+                        <img src="{% static 'images/eye-closed.png' %}" alt="Mostrar contraseña" id="togglePasswordIcon_id_confirm_password">
+                    </span>
+                </div>
+                {% if form.confirm_password.errors %}
+                    <p class="error">{{ form.confirm_password.errors }}</p>
+                {% endif %}
+            </div>
+            <button type="submit" class="btn">Registrarse</button>
+        </form>
+        <p>¿Ya tienes una cuenta? <a href="{% url 'login' %}">Inicia sesión aquí</a></p>
+    </div>
+    <script src="{% static 'js/scripts.js' %}"></script>
+</body>
+</html>

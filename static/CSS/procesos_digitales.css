@@ -1,0 +1,432 @@
+/* General */
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: #f5f7fa;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+*{
+    scrollbar-width: thin;
+    scrollbar-color: #4070B7 #f4f6f9;
+}
+
+/* Título de la Sección */
+.section-title{
+    width: 100%;
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    background: #4070B7;
+}
+
+.section-design{
+    width: 100%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding-left: 50px;
+}
+
+.section-design >h2{
+    font-size: 28px;
+}
+
+/* Contenedor Principal */
+.procesos-container {
+    max-width: 90%;
+    margin: 30px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 20px;
+    background: linear-gradient(145deg, #ffffff, #e6e6e6);
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Barra de Herramientas */
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 15px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Contenedor de título y botón */
+.titulo-boton-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px; /* Separa el título y el botón */
+    margin-bottom: 15px;
+}
+.titulo-boton-container > a{
+    text-decoration: none;
+}
+
+
+.btn-nuevo-proceso {
+    width: 20%;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(145deg, #4070B7, #305f9e);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+.btn-nuevo-proceso i {
+    font-size: 1.2rem;
+}
+
+.btn-nuevo-proceso:hover {
+    background: #265185;
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.botonera{
+    width: 40%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Secciones de Instructivos */
+.instructivo-general, .instructivos-trabajo, .instructivos-calidad {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #4070B7;
+}
+
+.instructivo-general h3,
+.instructivos-trabajo h3,
+.instructivos-calidad h3 {
+    font-size: 1.5rem;
+    color: #4070B7;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.instructivo-general p,
+.instructivos-trabajo p,
+.instructivos-calidad p {
+    color: #666;
+    font-size: 1rem;
+    margin: 10px 0;
+    line-height: 1.5;
+}
+
+/* Vista de Procesos */
+.procesos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.proceso-card-p{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    overflow-x: scroll;
+}
+
+.proceso-card-link{
+    text-decoration: none;
+    margin: 0 7px;
+}
+
+.proceso-card {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 350px;
+}
+
+.proceso-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.proceso-icon {
+    font-size: 2.5rem;
+    color: #4070B7;
+    margin-bottom: 10px;
+}
+
+.proceso-nombre {
+    font-size: 1.2rem;
+    color: #4070B7;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.proceso-detalle {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.4;
+}
+
+/* Compacto para Varias Tarjetas */
+.proceso-card {
+    padding: 15px;
+    height: auto;
+}
+
+.proceso-card:hover .proceso-icon {
+    color: #305f9e;
+    transform: scale(1.1);
+    transition: all 0.2s ease-in-out;
+}
+
+
+/* Contenedor de botones */
+.botones-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px; /* Espacio entre los botones */
+    width: 35%;
+}
+
+/* Estilos para el botón Eliminar Proceso */
+.btn-eliminar-proceso {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(145deg, #e74c3c, #c0392b);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    margin-left: 9px;
+}
+
+.btn-eliminar-proceso i {
+    font-size: 1.2rem;
+}
+
+.btn-eliminar-proceso:hover {
+    background: #a8322a;
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* 🔹 MODAL */
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    border: .3px solid #222222e5;
+    display: none;
+    z-index: 1000;
+    width: 950px;
+    max-width: 95%;
+}
+
+/* 🔹 Fondo opaco */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.517);
+    display: none;
+    z-index: 999;
+}
+
+.modal-overlay.active, .modal.active {
+    display: block;
+}
+
+/* 🔹 Encabezado con botón de cerrar */
+.modal-header {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.modal-header > button{
+    background: none;
+    border: none;
+    color: #e74c3c;
+    font-weight: 700;
+    font-size: 37px;
+    transition: all .1s ease;
+}
+.modal-header > button:hover{
+    color: #ec6a5c;
+    cursor: pointer;
+}
+
+/* 🔹 Diseño del contenido */
+.modal-content {
+    display: flex;
+    gap: 20px;
+    align-items: start;
+}
+
+/* 🔹 Estilos del formulario */
+.modal-form {
+    width: 50%;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 25px;
+}
+
+.modal-form > h1{
+    color: #4070B7;
+}
+
+.modal-form > h3{
+    margin-bottom: 25px;
+    color: #4070B7;
+    width: 100%;
+    text-align: left;
+}
+
+.modal-form > label{
+    text-align: left;
+    width: 100%;
+    font-weight: 600;
+    font-size: 17px;
+    color: #4070B7;
+}
+
+.modal-form select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: .3px solid #4070B7;
+    border-radius: 5px;
+    margin-bottom: 16px;
+}
+
+.modal-actions{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+/* 🔹 Imagen */
+.modal-image {
+    width: 50%;
+}
+
+.modal-image img {
+    width: 100%;
+}
+
+.btn-delete {
+    background: #4070B7;
+    color: white;
+    width: 100%;
+    padding: 8px;
+    font-size: 15px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: none;
+    transition: all .3s ease-in;
+}
+
+.btn-delete:hover{
+    background: #4f78b5;
+    cursor: pointer;
+    color: #e74c3c;
+}
+
+.btn-delete > i{
+    margin-right: 10px;
+}
+
+.btn-cancel {
+    background: #4070B7;
+    color: white;
+    width: 40%;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+/* Mejoras Responsivas */
+@media (max-width: 768px) {
+    .toolbar {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .procesos-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .btn-nuevo-proceso {
+        width: 100%;
+    }
+}
+
+/* Notificaciones Visuales */
+.proceso-card::after {
+    content: "Editar";
+    display: block;
+    font-size: 0.85rem;
+    color: white;
+    background: #4070B7;
+    border-radius: 0 0 10px 10px;
+    padding: 5px 0;
+    margin-top: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.proceso-card:hover::after {
+    opacity: 1;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.proceso-card {
+    animation: fadeIn 0.5s ease;
+}

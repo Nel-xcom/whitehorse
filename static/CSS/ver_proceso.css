@@ -1,0 +1,246 @@
+/* Estilo global */
+
+:root {
+    --primary-color: #4070B7;
+    --primary-hover: #305a8c;
+    --secondary-color: #8FFFFF;
+    --background-light: #f4f6f9;
+    --text-color: #333;
+    --border-radius: 10px;
+    --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    --transition: 0.3s ease-in-out;
+    --task-background: #ffffff;
+}
+*{
+    scrollbar-width: thin;
+    scrollbar-color: #4070B7 #f4f6f9;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f9;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+.body-des-pos{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 25px 0;
+}
+.body-des {
+    width: 65%;
+    background-color: #ffffff;
+    padding: 40px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: center;
+    align-items: center;
+}
+
+/* Título de la sección */
+.section-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.section-title > h1 {
+    color: #4070B7;
+    font-size: 1.8em;
+    font-weight: 700;
+}
+
+
+/*Sobre el sector*/
+.description-section > h3{
+    color: #4070b7;
+    font-size: 19px;
+    margin-bottom: 8px;
+    border: none;
+    border-bottom: .2px solid #4070b79d;
+    box-shadow: 0px 3px 3px #4070b733;
+}
+.description-section > p{
+    color: #222222;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+/*Lista de Perfiles de Puesto*/
+.main-container > h3{
+    color: #4070b7;
+    font-size: 19px;
+    border: none;
+    border-bottom: .2px solid #4070b79d;
+    box-shadow: 0px 3px 3px #4070b733;
+}
+/* Grid aplicado al UL */
+.user-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    padding: 0;
+    list-style: none;
+    margin: 20px auto;
+    max-width: 80%;
+}
+
+/* Cada elemento LI como una tarjeta */
+.user-list li {
+    background: var(--task-background);
+    border: 1px solid var(--primary-color);
+    border-radius: var(--border-radius);
+    box-shadow: 0px 0px 3px 3px #4070b71b;
+    padding: 16px;
+    text-align: center;
+    font-weight: 500;
+    color: var(--text-color);
+    transition: transform var(--transition), box-shadow var(--transition);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.user-list > li > b{
+    color: var(--primary-color);
+}
+
+
+/* Descripción en texto más suave */
+.user-list li span.description {
+    display: block;
+    font-size: 0.9em;
+    color: #555;
+    margin-top: 8px;
+}
+
+/* Estilo cuando no hay usuarios */
+.user-list li.empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-weight: 600;
+    color: #999;
+    border: none;
+    background: none;
+    cursor: default;
+}
+
+/* Contenedor principal */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Logo de la empresa y actualización */
+.logo-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.company-logo {
+    width: 150px;
+    height: auto;
+    object-fit: contain;
+}
+
+.update-logo-button {
+    font-size: 14px;
+    color: #fff;
+    background-color: #4070B7;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.update-logo-button:hover {
+    background-color: #35619A;
+}
+
+/* Información fiscal */
+.fiscal-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.fiscal-info label {
+    font-weight: bold;
+    color: #4070B7;
+}
+
+.fiscal-info p {
+    color: #555;
+    margin: 0;
+}
+
+/* Secciones de contenido */
+.section {
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.section h3 {
+    font-size: 1.2em;
+    color: #4070B7;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.section p {
+    color: #555;
+    line-height: 1.5;
+}
+
+/* Listado de tareas */
+.task-list-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.task-list-section ul li {
+    background-color: #f9f9f9;
+    margin-bottom: 5px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    color: #555;
+}
+
+/* Botón de guardar proceso */
+.save-process {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.save-process button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 24px;
+    font-size: 16px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.save-process button:hover {
+    background-color: #4CAF50;
+}
+
+/* Mensaje de proceso aceptado */
+.save-process p {
+    color: #4CAF50;
+    font-weight: bold;
+    margin-top: 20px;
+}

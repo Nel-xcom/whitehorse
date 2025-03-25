@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ sector.nombre }}</title>
+    <link rel="stylesheet" href="{% static 'css/crear_proceso.css' %}">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    {% include 'loading.html' %}
+    {% include "header.html" %}
+
+    <div class="section-title">
+        <div class="section-design">
+            <h2>
+                {% if tipo_proceso == "instructivo_general" %}
+                    Crear Documento de Bienvenida
+                {% else %}
+                    Crear Instructivo de Trabajo / Calidad
+                {% endif %}
+            </h2>
+        </div>
+    </div>
+
+    <div class="form-container">
+        <div class="logo-section">
+            {% if proceso.logo_empresa %}
+                <img src="{{ proceso.logo_empresa.url }}" alt="Logo del Proceso" class="company-logo">
+            {% else %}
+                <p class="no-logo">Asigna un logo para este proceso...</p>
+            {% endif %}
+        </div>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn-guardar">Guardar</button>
+        </form>
+    </div>
+
+    <script>
+        document.querySelector('.update-logo-btn').addEventListener('click', function() {
+            document.getElementById('update-logo-modal').style.display = 'block';
+        });
+
+        document.getElementById('close-modal').addEventListener('click', function() {
+            document.getElementById('update-logo-modal').style.display = 'none';
+        });
+
+        document.getElementById("logo-input").addEventListener("change", function() {
+            const fileName = this.files.length ? this.files[0].name : "No se ha seleccionado ningún archivo";
+            document.getElementById("file-name").textContent = fileName;
+        });
+    </script>
+
+</body>
+</html>

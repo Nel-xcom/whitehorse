@@ -1,0 +1,298 @@
+/* Variables para personalización */
+:root {
+    --primary-color: #4070B7;
+    --primary-hover: #305a8c;
+    --secondary-color: #8FFFFF;
+    --background-color: #f9f9f9;
+    --text-color: #333;
+    --border-radius: 12px;
+    --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --font-family: 'Inter', sans-serif;
+}
+
+/* Reset moderno */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+*{
+    scrollbar-width: thin;
+    scrollbar-color: #4070B7 #f4f6f9;
+}
+.logo-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.company-logo {
+    width: 180px;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Contenedor principal */
+.section-title {
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.section-design {
+    width: 100%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding-left: 50px;
+    color: #ffffff;
+    background: #4070B7;
+}
+
+.section-design > h2 {
+    font-size: 28px;
+}
+
+/* Contenedor de datos del proceso */
+.datos-proceso {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 30px;
+    margin: 20px auto;
+    width: 100%;
+    max-width: 900px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: center;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Logo del proceso */
+.logo-proceso {
+    grid-column: 1 / -1; /* Ocupa toda la fila */
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.company-logo {
+    width: 150px;
+    height: auto;
+    border-radius: var(--border-radius);
+}
+
+/* Elementos dentro del contenedor */
+.datos-proceso .campo {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.datos-proceso .campo label {
+    font-weight: bold;
+    color: var(--primary-color);
+    font-size: 1rem;
+}
+
+.datos-proceso .campo input,
+.datos-proceso .campo textarea {
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: var(--border-radius);
+    background-color: var(--background-color);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.datos-proceso .campo input:focus,
+.datos-proceso .campo textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 6px rgba(64, 112, 183, 0.4);
+    outline: none;
+}
+
+/* Formulario */
+.form-container {
+    background-color: #fff;
+    max-width: 1100px;
+    margin: 0 auto;
+    margin-top: 25px;
+    padding: 40px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    border: 1px solid #cbcbcb;
+    overflow: hidden; /* Para evitar desbordamientos */
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.form-container > form{
+    display: grid;
+    gap: 20px;
+}
+
+.form-container > form > p {
+    color: var(--primary-color);
+    font-weight: 500;
+
+}
+
+.form-container > form > p > a{
+    color: var(--primary-color);
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.form-container > form > p > input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-left: 25px;
+}
+
+.form-container > form > p > input[type="file"] {
+    position: relative;
+    font-size: 16px;
+    color: transparent;
+    width: 100%;
+    max-width: 300px;
+    cursor: pointer;
+    padding: 5px 7px;
+    border: 2px dashed var(--primary-color);
+    border-radius: var(--border-radius);
+    background-color: var(--background-color);
+    transition: all 0.3s ease-in-out;
+}
+
+.form-container > form > p > input[type="file"]::file-selector-button {
+    background-color: var(--primary-color);
+    width: 100%;
+    color: white;
+    font-size: 16px;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    font-weight: bold;
+}
+
+.form-container > form > p > input[type="file"]::file-selector-button:hover {
+    background-color: var(--primary-hover);
+}
+
+.form-container > form > p > label{
+    color: var(--primary-color);
+    font-size: 1.12rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+/* Input y Select */
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form textarea,
+form select {
+    width: 100%;
+    padding: 15px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: var(--border-radius);
+    background-color: var(--background-color);
+    transition: all 0.3s ease;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+form input:focus,
+form textarea:focus,
+form select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background-color: #fff;
+    box-shadow: 0 0 6px rgba(64, 112, 183, 0.4);
+}
+
+/* Textarea */
+form textarea {
+    resize: none;
+    height: 120px;
+}
+
+/* Botón de guardar */
+.btn-guardar {
+    grid-column: 1 / -1; /* Ocupa toda la fila */
+    background-color: var(--primary-color);
+    color: #fff;
+    font-size: 1.2rem;
+    padding: 15px;
+    text-transform: uppercase;
+    font-weight: bold;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 20px;
+}
+
+.btn-guardar:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-3px);
+}
+
+.btn-guardar:active {
+    transform: translateY(0);
+}
+
+/* Responsividad moderna */
+@media (max-width: 768px) {
+    .datos-proceso {
+        grid-template-columns: 1fr;
+    }
+
+    .form-container {
+        padding: 30px 20px;
+    }
+
+    .section-design h2 {
+        font-size: 2rem;
+    }
+
+    form input,
+    form textarea,
+    form select {
+        font-size: 0.95rem;
+    }
+
+    .btn-guardar {
+        font-size: 1rem;
+    }
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

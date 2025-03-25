@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NelX | Flujos de trabajo</title>
+    <link rel="stylesheet" href="{% static 'css/flujos_trabajo.css' %}">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <style>
+        .btn-procesos-digitales {
+            background-image: url("{% static 'images/add-ft-back.png' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    </style>
+</head>
+
+<body>
+
+    {% include 'loading.html' %}
+    {% include "header.html" %}
+    <div class="section-title">
+        <div class="section-design">
+            <h2>Flujos de Trabajo</h2>
+            <label>Crea guías ordenadas de tareas y estandariza resultados</label>
+        </div>
+    </div>
+
+    <div class="contenedor-flujos">
+        <div class="contenedor-agregar">
+            <div class="create-process" id="inicio-flujo">
+                <h2>Agregar Flujo de Trabajo</h2>
+                <button class="btn-procesos-digitales" id="btnMostrarFormulario">
+                    <i class="fas fa-plus"></i><label>Agregar</label>
+                </button>
+            </div>
+    
+            <!-- Formulario oculto inicialmente -->
+            <div class="form-container hidden" id="form-flujo">
+                <div class="progress-bar">
+                    <div class="step active">1</div>
+                    <div class="step">2</div>
+                    <div class="step">3</div>
+                    <div class="step">4</div>
+                    <div class="step">5</div>
+                </div>
+    
+                <div class="form-step" id="step-1">
+                    <h2>Selecciona Tareas Relacionadas</h2>
+                    <label>Selecciona un sector para añadir tareas:</label>
+                    <select id="select-sector">
+                        <option value="">Seleccione un sector</option>
+                        {% for sector in sectores %}
+                            <option value="{{ sector.id }}">{{ sector.nombre }}</option>
+                        {% empty %}
+                            <option value="">No hay sectores disponibles</option>
+                        {% endfor %}
+                    </select>
+                
+                    <div id="sectores-tareas-container"></div> <!-- Contenedor que muestra tareas agrupadas por sector -->
+                
+                    <div id="tareas-seleccionadas">
+                        <h3>Tareas Seleccionadas:</h3>
+                        <ul id="lista-tareas-seleccionadas"></ul>
+                    </div>
+                
+                    <div class="botones-seleccion">
+                        <button onclick="nextStep()" id="btnContinuar" disabled>Continuar</button>
+                    </div>
+                </div>                
+                
+                
+    
+                <div class="form-step hidden" id="step-2">
+                    <h2>Nombre del Flujo</h2>
+                    <input type="text" id="nombre-flujo" placeholder="Ingrese el nombre" required>
+                    <button onclick="nextStep()">Continuar</button>
+                </div>
+    
+                <div class="form-step hidden" id="step-3">
+                    <h2>Asignar Responsables</h2>
+                    <div id="asignar-responsables"></div>
+                    <button onclick="nextStep()">Continuar</button>
+                </div>
+    
+                <div class="form-step hidden" id="step-4">
+                    <h2>Orden de Tareas</h2>
+                    <div id="ordenar-tareas" class="sortable-list"></div>
+                    <button onclick="guardarOrden()">Guardar Orden</button>
+                    <button onclick="nextStep()">Continuar</button>
+                </div>                                           
+    
+                <div class="form-step hidden" id="step-5">
+                    <button onclick="guardarFlujo()">Guardar Flujo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="{% static 'js/flujos_trabajo.js' %}"></script>
+</body>
+</html>

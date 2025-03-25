@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medir Tiempo de Tareas</title>
+    <link rel="stylesheet" href="{% static 'css/medir_tiempo.css' %}">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    {% include 'loading.html' %}
+    {% include "header.html" %}
+    <div class="section-title">
+        <div class="section-design">
+            <h2>Medición de Tareas</h2>
+        </div>
+    </div>
+
+    <div class="time-tracker-container">
+        <!-- Selección de Tarea -->
+        <div class="task-selector">
+            <label for="task-select">Seleccionar Tarea:</label>
+            <select id="task-select">
+                <option value="tarea1">Revisión de documentos</option>
+                <option value="tarea2">Actualizar inventario</option>
+                <option value="tarea3">Elaborar reporte mensual</option>
+            </select>
+        </div>
+
+        <!-- Temporizador -->
+        <div class="timer">
+            <h3>Tiempo Transcurrido</h3>
+            <div class="timer-display">
+                <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
+            </div>
+            <div class="timer-actions">
+                <button id="start-timer" class="btn-timer"><i class="fas fa-play"></i> Iniciar</button>
+                <button id="pause-timer" class="btn-timer"><i class="fas fa-pause"></i> Pausar</button>
+                <button id="reset-timer" class="btn-timer"><i class="fas fa-redo"></i> Reiniciar</button>
+            </div>
+        </div>
+
+        <!-- Registro de Tiempos -->
+        <div class="time-log">
+            <h3>Historial de Tiempos</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tarea</th>
+                        <th>Tiempo Total</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Revisión de documentos</td>
+                        <td>01:23:45</td>
+                        <td>21/12/2024</td>
+                    </tr>
+                    <tr>
+                        <td>Actualizar inventario</td>
+                        <td>00:45:12</td>
+                        <td>21/12/2024</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

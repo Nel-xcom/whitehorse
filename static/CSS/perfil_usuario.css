@@ -1,0 +1,177 @@
+/* Estilo General */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+*{
+    scrollbar-width: thin;
+    scrollbar-color: #4070B7 #f4f6f9;
+}
+/* Título de la Sección */
+.section-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #4070B7;
+    color: white;
+    padding: 15px 0;
+    margin-bottom: 35px;
+}
+
+.section-title h2 {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.section-design{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Contenedor General */
+.perfil-container {
+    max-width: 80%;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Datos Básicos */
+.perfil-datos {
+    text-align: center;
+}
+
+.perfil-datos .foto-perfil {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.perfil-datos h2 {
+    font-size: 1.8em;
+    color: #4070B7;
+    margin-bottom: 5px;
+}
+
+.perfil-datos p {
+    font-size: 1em;
+    color: #333;
+}
+
+/* Indicadores */
+.indicadores {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.indicador {
+    flex: 1;
+    text-align: center;
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.indicador h3 {
+    font-size: 1.2em;
+    color: #4070B7;
+    margin-bottom: 10px;
+}
+
+.indicador p {
+    font-size: 2em;
+    font-weight: bold;
+    color: #4070B7;
+}
+
+.indicador-red > p {
+    color: #ff0000;
+}
+
+/* Historial de Tareas */
+.historial-tareas{
+    overflow-y: scroll;
+    height: 50vh;
+}
+
+.historial-tareas table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1em;
+    text-align: left;
+}
+
+.historial-tareas th, .historial-tareas td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.historial-tareas th {
+    background: #4070B7;
+    color: white;
+}
+
+.historial-tareas tbody tr:hover {
+    background: #f1f1f1;
+}
+
+/* Análisis de Conducta */
+.analisis-conducta {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.analisis-conducta h3 {
+    font-size: 1.5em;
+    color: #4070B7;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Gráfico de Conducta */
+.grafico-conducta {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto 30px;
+}
+
+/* Indicadores de Patrones */
+.indicadores-patrones {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.indicador-patron {
+    flex: 1;
+    text-align: center;
+    background: #f9f9f9;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.indicador-patron h4 {
+    font-size: 1.2em;
+    color: #4070B7;
+    margin-bottom: 10px;
+}
+
+.indicador-patron p {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+}

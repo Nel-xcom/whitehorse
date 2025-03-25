@@ -1,0 +1,161 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Sector</title>
+    <link rel="stylesheet" href="{% static 'css/tareas.css' %}">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> <!-- Para usar iconos de Font Awesome -->
+</head>
+
+<body>
+    {% include 'loading.html' %}
+    {% include "header.html" %}
+
+    <div class="section-title">
+        <div class="section-design">
+            <h2>{{sector.nombre}}</h2>
+        </div>
+    </div>
+
+    <!-- Contenedor principal -->
+    <div class="main-container">
+
+        <!-- Nuevo contenedor para importar y crear procesos -->
+        <div class="process-container">
+
+            <!-- Crear proceso -->
+            <div class="create-process">
+
+                <button class="btn-procesos-digitales" onclick="window.location.href='/sectores/{{ sector.id }}/procesos/'">
+                    <i class="fas fa-file-alt"></i><label>Instructivos Digitales</label>
+                </button>
+
+                <!-- Procesos Digitales -->
+                <button class="btn-procesos-digitales" onclick="window.location.href='/flujos_trabajo/proceso/'">
+                    <i class="fa-solid fa-diagram-project"></i><label>Flujos de Trabajo</label>
+                </button>
+
+                <button class="btn-procesos-digitales" onclick="window.location.href='/sectores/{{ sector.id }}/procesos/'">
+                    <i class="fa-solid fa-bullseye"></i><label>Objetivos</label>
+                </button>
+
+            </div>
+
+            <!-- Buscar tarea/sector -->
+            <div class="search-container">
+                <h3>Buscar tarea</h3>
+                <div class="input-icon">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Buscar por sector o tarea" class="input-search">
+                </div>
+
+                <!-- Tabla para mostrar las tareas -->
+                <div class="tasks-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Responsable</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="tabla-task" id="tasks-list">
+                            {% for tarea in tareas %}
+                                <tr>
+                                    <td><a href="{% url 'editar_tarea' tarea.id %}" class="task-link">{{ tarea.nombre }}</a></td>
+                                    <td>{{ tarea.responsable }}</td>
+                                    <td>
+                                        <a href="{% url 'borrar_tarea' tarea.id %}" class="delete-task">
+                                            <i class="fas fa-trash-alt"></i> <!-- Icono de tacho -->
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <td colspan="3">No hay tareas para este sector aún.</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>                
+            </div>
+        </div>
+
+        <!-- Formulario para agregar nuevas tareas -->
+        <div class="form-position">
+            <div class="form-design">
+                <div class="form-title">
+                    <i class="fas fa-tasks"></i><h2>Agregar Tarea</h2>
+                </div>
+                
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="input-position-s">
+                        <div class="input-style">
+                            <strong>Nombre:</strong>
+                            {{ form.nombre }}
+                        </div>
+            
+                        <div class="input-style">
+                            <strong>Responsable:</strong>
+                            {{ form.responsable }}
+                        </div>
+                    </div>
+        
+                    <div class="input-style descr">
+                        <strong>Descripción:</strong>
+                        {{ form.descripcion }}
+                    </div>
+        
+                    <div class="input-position-s">
+                        <div class="input-style">
+                            <strong>Notificación:</strong>
+                            {{ form.notificacion }}
+                        </div>
+            
+                        <div class="input-style">
+                            <strong>Fecha de Vencimiento:</strong>
+                            {{ form.fecha_vencimiento }}
+                        </div>
+
+                        <div class="input-style">
+                            <strong>Prioridad:</strong>
+                            {{ form.prioridad }}
+                        </div>
+                    </div>
+        
+                    <button type="submit" class="btn">Agregar Tarea</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Funcionalidad de búsqueda
+            const searchInput = document.querySelector('.input-search');
+            const tasksTable = document.getElementById('tasks-list');
+    
+            searchInput.addEventListener('keyup', function() {
+                const filter = searchInput.value.toLowerCase();
+                const rows = tasksTable.getElementsByTagName('tr');
+    
+                Array.from(rows).forEach(function(row) {
+                    const taskName = row.querySelector('.task-link').textContent.toLowerCase();
+                    if (taskName.indexOf(filter) > -1) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,289 @@
+/* Estilo General */
+
+*{
+    scrollbar-width: thin;
+    scrollbar-color: #4070B7 #f4f6f9;
+}
+
+:root {
+    --primary-color: #4070B7;
+    --primary-hover: #305a8c;
+    --secondary-color: #8FFFFF;
+    --background-light: #f4f6f9;
+    --text-color: #333;
+    --border-radius: 10px;
+    --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    --transition: 0.3s ease-in-out;
+    --task-background: #ffffff;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image: url("/static/images/home-back.png");
+    background-size: cover; /* Ajusta la imagen al tamaño del viewport */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    margin: 0;
+    padding: 0;
+}
+
+/* Título de la Sección */
+.section-title{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 0 0 0;
+}
+
+.section-design{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    color: #ffffff;
+    font-size: 27px;
+    margin-left: 30px;
+    padding: 60px;
+}
+
+.section-design > h2{
+    margin-left: 7px;
+    font-size: 35px;
+}
+
+/* Contenedor General */
+.home-container {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 40px 0;
+}
+
+/* Contenedor Iniciar Tarea Inteligente */
+.contenedor-iniciar-tarea {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #84aeed1a;
+    border: 2.5px dashed #6196e5;
+    color: #ffffff;
+    border-radius: 15px;
+    padding: 35px 30px;
+    box-shadow: 0 4px 10px rgba(229, 229, 229, 0.21);
+}
+
+.iniciar-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.iniciar-title > h2{
+    font-size: 3.2em;
+    font-weight: bold;
+}
+
+.iniciar-title > h2 > p{
+    margin-top: 8px;
+    font-size: 17px;
+    font-weight: 400;
+}
+
+.iniciar-title > i{
+    font-size: 1.8rem;
+}
+
+.contenedor-iniciar-tarea h2 {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-left: 9px;
+}
+
+.btn-iniciar-tarea {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    border: .3px solid #ffffff54;
+    box-shadow: 0 4px 10px rgba(229, 229, 229, 0.17);
+    padding: 20px 50px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-iniciar-tarea i {
+    font-size: 1.8em;
+}
+
+.btn-iniciar-tarea:hover {
+    background: #305f9e;
+    transform: scale(1.05);
+}
+
+/* Contenedor de Tareas Finalizadas */
+.contenedor-tareas-finalizadas {
+    border-radius: 15px;
+    padding: 20px;
+    background: #84aeed1a;
+    border: 2.5px dashed #6196e5;
+    box-shadow: 0 4px 10px rgba(229, 229, 229, 0.21);
+}
+
+.contenedor-tareas-finalizadas h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+/* Tabla */
+.tabla-tareas {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1em;
+    text-align: left;
+}
+
+.tabla-tareas th, .tabla-tareas td {
+    padding: 10px 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.tabla-tareas th {
+    background: #4070B7;
+    color: #ffffff;
+}
+
+.tabla-tareas td {
+    color: #f9f9f9;
+}
+
+
+.flecha-verde {
+    color: green;
+    margin-left: 10px;
+}
+
+/* Contenedores de Tareas */
+.contenedores-tareas {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.contenedor-tarea {
+    flex: 1;
+    height: 40vh;
+    background: #84aeed1a;
+    border: 2.5px dashed #6196e5;
+    box-shadow: 0 4px 10px rgba(229, 229, 229, 0.21);
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: #4070b78a #f4f6f9;
+    color: #ffffff;
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.contenedor-tarea h3 {
+    font-size: 1.2em;
+    background: #6196e547;
+    color: #ffffff;
+    margin-bottom: 15px;
+    padding: 10px;
+    text-align: center;
+    border-top-right-radius: 7px;
+    border-top-left-radius: 7px;
+}
+
+/* Tabla en Contenedores */
+.tabla-tareas-usuario {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+    color: #333;
+}
+
+.tabla-tareas-usuario th,
+.tabla-tareas-usuario td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.tabla-tareas-usuario th {
+    background: #305f9e;
+    color: white;
+    text-align: left;
+}
+
+.tabla-tareas-usuario >tbody> tr{
+    background: transparent;
+}
+
+.tabla-tareas-usuario tr:hover {
+    background: rgba(64, 112, 183, 0.2);
+}
+
+.tabla-tareas-usuario a {
+    color: #ffffff;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.tabla-tareas-usuario a:hover {
+    text-decoration: underline;
+    color: #305f9e;
+}
+
+
+
+#typewriter-text {
+    display: inline-block;
+    overflow: hidden;
+    border-right: 2px solid transparent;
+    white-space: nowrap;
+    width: 0;
+    font-size: 1rem;
+    animation: typing 2s steps(50, end) forwards, blink 0.8s infinite;
+}
+
+/* Animación de escritura */
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+/* Parpadeo del cursor */
+@keyframes blink {
+    from {
+        border-color: black;
+    }
+    to {
+        border-color: transparent;
+    }
+}
+
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .contenedores-tareas {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+

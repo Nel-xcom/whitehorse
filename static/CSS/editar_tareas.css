@@ -1,0 +1,112 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+*{
+    scrollbar-width: thin;
+    scrollbar-color: #4070B7 #f4f6f9;
+}
+.section-title{
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.section-title > h2{
+    color: #222222;
+    margin-left: 25px;
+    font-weight: 800;
+    font-size: 28px;
+}
+
+.section-design{
+    width: 100%;
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #ffffff;
+    padding-left: 25px;
+    font-size: 25px;
+    background: rgb(0,189,255);
+    background: linear-gradient(90deg, rgba(0,189,255,1) 0%, rgba(143,255,255,1) 0%, rgba(113,201,228,1) 19%, rgba(95,169,212,1) 37%, rgba(87,154,204,1) 56%, rgba(64,112,183,1) 100%);
+}
+
+.section-design >h2{
+    display: flex;
+}
+
+
+/* Contenedor principal */
+.main-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+/* Sección para editar campos de la tarea */
+.edit-task,
+.configure-notifications {
+    width: 45%;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.edit-task-title,
+.notifications-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.edit-task-title h2,
+.notifications-title h2 {
+    color: #4070b7;
+}
+
+.input-style {
+    margin-bottom: 15px;
+}
+
+.input-style label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    color: #4070b7;
+}
+
+.input-style input,
+.input-style textarea,
+.input-style select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #4070b7;
+    border-radius: 7px;
+    font-size: 14px;
+}
+
+.input-style textarea {
+    resize: vertical;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #4070b7;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #4070b7;
+}

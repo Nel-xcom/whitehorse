@@ -1,0 +1,164 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil Público del Usuario</title>
+    <link rel="stylesheet" href="{% static 'css/perfil_usuario.css' %}">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    {% include 'loading.html' %}
+    {% include "header.html" %}
+    <div class="section-title">
+        <div class="section-design">
+            <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+            <p>Sectores: 
+                {% for sector in user.sectores.all %}
+                    <span>{{ sector.nombre }}</span>{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </p>
+        </div>
+    </div>
+
+    <div class="perfil-container">
+
+        <!-- Indicadores de Rendimiento -->
+        <div class="indicadores">
+            <div class="indicador">
+                <h3>Tareas Completadas</h3>
+                <p>{{ indicadores.completadas }}</p>
+            </div>
+            <div class="indicador indicador-red">
+                <h3>Tareas Pendientes</h3>
+                <p>{{ indicadores.pendientes }}</p>
+            </div>
+            <div class="indicador">
+                <h3>Eficiencia</h3>
+                <p>{{ indicadores.eficiencia }}%</p>
+            </div>
+        </div>
+
+
+        <!-- Análisis de Patrones de Conducta -->
+        <div class="analisis-conducta">
+            <h3>Patrones de Conducta</h3>
+            <div class="grafico-conducta">
+                <canvas id="graficoActividad"></canvas>
+            </div>
+            <div class="indicadores-patrones">
+                <div class="indicador-patron">
+                    <h4>Día Más Productivo</h4>
+                    <p>{{ patrones.dia_mas_productivo }}</p>
+                </div>
+                <div class="indicador-patron">
+                    <h4>Hora Pico de Actividad</h4>
+                    <p>{{ patrones.hora_pico }}</p>
+                </div>
+                <div class="indicador-patron">
+                    <h4>Tarea Más Común</h4>
+                    <p>{{ patrones.tarea_mas_comun }}</p>
+                </div>
+            </div>
+            
+        </div>
+
+
+        <!-- Historial de Tareas -->
+        <div class="historial-tareas">
+            <h3>Historial de Tareas</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Estado</th>
+                        <th>Fecha de Creación</th>
+                        <th>Fecha de Finalización</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for tarea in tareas %}
+                    <tr>
+                        <td>{{ tarea.descripcion }}</td>
+                        <td>{{ tarea.get_estado_display }}</td>
+                        <td>{{ tarea.fecha_creacion|date:"d/m/Y" }}</td>
+                        <td>{{ tarea.fecha_finalizacion|date:"d/m/Y" }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="3">No hay tareas registradas.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+
+
+    </div>
+
+
+
+    <script id="graficoDatos" type="application/json">{{ grafico_datos|safe }}</script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const ctx = document.getElementById('graficoActividad').getContext('2d');
+        
+            // Obtener datos dinámicos desde una variable de contexto (generada por Django)
+            const graficoDatos = JSON.parse(document.getElementById('graficoDatos').textContent);
+        
+            const graficoActividad = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+                    datasets: [{
+                        label: 'Tareas Completadas',
+                        data: graficoDatos, // Usar los datos dinámicos
+                        backgroundColor: [
+                            '#4070B7', '#4070B7', '#4070B7', '#4070B7', '#4070B7', '#4070B7', '#4070B7'
+                        ],
+                        borderRadius: 10
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.raw} Tareas`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: {
+                                color: '#4070B7'
+                            },
+                            grid: {
+                                display: false
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                color: '#4070B7'
+                            },
+                            grid: {
+                                color: '#eee'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+        
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,136 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NelX | Comunicacion Interna</title>
+    <link rel="stylesheet" href="{% static 'css/comunicacion_interna.css' %}">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    {% include 'loading.html' %}
+    {% include "header.html" %}
+    <div class="section-title">
+        <div class="section-design">
+            <h2>Comunicación Interna</h2>
+        </div>
+    </div>
+
+    <div class="panel-comunicacion">
+
+        <!-- Contenedor 1: Barra de Búsqueda y Resultados -->
+        <div class="contenedor-busqueda">
+            <h2>Buscar Usuarios</h2>
+            <div class="barra-busqueda">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Buscar usuario..." id="input-busqueda-usuarios">
+            </div>
+            <div class="resultados-busqueda" id="resultados-busqueda">
+                <!-- Este contenedor se llenará dinámicamente con los datos obtenidos del servidor -->
+            </div>
+
+            <div id="modal-solicitud" class="modal">
+                <div class="modal-content">
+                    <h3>Solicitar Tarea</h3>
+                    <form>
+                        {% csrf_token %}
+                        <label for="descripcion">Descripción:</label>
+                        <textarea id="descripcion" name="descripcion" required></textarea>
+                        <label for="fecha_finalizacion">Fecha de finalización:</label>
+                        <input type="date" id="fecha_finalizacion" name="fecha_finalizacion" required>
+                        <div class="modal-buttons">
+                            <button type="submit" class="btn-confirmar">Enviar</button>
+                            <button type="button" class="btn-cancelar" onclick="document.getElementById('modal-solicitud').classList.remove('show')">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contenedor 2: Solicitudes general -->
+        <div class="solicitudes-all">
+
+            <!-- Seguimiento de Solicitudes -->
+            <div class="solicitud-seguimiento">
+                <div class="contenedor-title">
+                    <h3>Seguimiento de tareas</h3>
+                </div>
+                <div class="contenedor-buttons">
+                    <div class="button-container">
+                        <button class="btn-seguimiento" onclick="window.location.href='{% url 'solicitudes_enviadas' %}'">
+                            <i class="fas fa-paper-plane"></i>
+                            <span>Solicitudes Enviadas</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Solicitudes Pendientes -->
+            <div class="contenedor-solicitudes">
+                <h2>Solicitudes Pendientes</h2>
+                <div class="slider-solicitudes">
+                    <button class="slider-btn slider-btn-left">&lt;</button>
+
+                    <div class="slider">
+                        {% for solicitud in solicitudes %}
+                        <div class="card-solicitud" data-solicitud-id="{{ solicitud.id }}">
+                            <h3>{{ solicitud.solicitante.first_name }} {{ solicitud.solicitante.last_name }}</h3>
+                            <p>Descripción: {{ solicitud.descripcion }}</p>
+                            <p>Fecha de Finalización: {{ solicitud.fecha_finalizacion }}</p>
+                            <div class="acciones-solicitud">
+                                <form method="post" action="{% url 'aceptar_solicitud' solicitud.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn-aceptar">Aceptar</button>
+                                </form>
+
+                                <button class="btn-posponer" data-solicitud-id="{{ solicitud.id }}">Rechazar</button>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <p>.</p>
+                        {% endfor %}
+
+                    </div>
+                    
+                    <button class="slider-btn slider-btn-right">&gt;</button>
+                </div>
+
+            </div>
+
+            <!-- Modal de Confirmación para Posponer -->
+            <div id="modal-posponer-confirmacion" class="modal modal-posponer">
+                <div class="modal-content">
+                    <h3>¿Deseas posponer la tarea?</h3>
+                    <div class="modal-buttons">
+                        <button id="btn-posponer-si" class="btn-confirmar">Sí</button>
+                        <button id="btn-posponer-no" class="btn-cancelar">No</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal para rechazar solicitud -->
+            <div id="modal-posponer" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <span class="close-modal">&times;</span>
+                    <h3>Rechazar Solicitud</h3>
+                    <textarea id="motivo-posponer" placeholder="Escribe el motivo..."></textarea>
+                    <button id="btn-enviar-posponer">Enviar</button>
+                </div>
+            </div>
+
+
+            <!-- Overlay para Modales de Posponer -->
+            <div id="overlay-posponer" class="modal-overlay modal-posponer-overlay"></div>
+
+
+    </div>
+
+    <script src="{% static 'js/comunicacion_interna.js' %}"></script>
+    <script src="{% static 'js/posponer_tarea.js' %}"></script>
+</body>
+</html>
